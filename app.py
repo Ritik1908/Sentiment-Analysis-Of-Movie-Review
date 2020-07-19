@@ -49,7 +49,7 @@ def process_text(text):
 def home():
    return render_template("index.html")
 
-@app.route("/predict", methods=['POST'])
+@app.route("/", methods=['POST'])
 def predict():
     review_original = request.form.get("review")
     review_processed = [process_text(review_original)]
@@ -57,7 +57,7 @@ def predict():
     review_processed = words.transform(review_processed)
     ans = str(models.predict(review_processed)[0])
     # return ans
-    return render_template("predict.html", original_review = review_original, result = ans)
+    return render_template("index.html", original_review = review_original, result = ans)
 
 if __name__ == '__main__':
    app.run(debug=True)
